@@ -8,6 +8,9 @@ export default defineConfig({
 	adapter: node({
 		mode: "standalone",
 	}),
+	security: {
+		checkOrigin: false,
+	},
 	experimental: {
 		env: {
 			validateSecrets: false,

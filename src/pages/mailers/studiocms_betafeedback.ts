@@ -50,7 +50,12 @@ export const POST: APIRoute = async (
 
 	try {
 		await SendGrid.send(msg);
-		return new Response("Email sent", { status: 200 });
+		return new Response("Email sent", {
+			status: 200,
+			headers: {
+				"ACCESS-CONTROL-ALLOW-ORIGIN": "*",
+			},
+		});
 	} catch (error) {
 		const {
 			response: { body: errorResponse },
