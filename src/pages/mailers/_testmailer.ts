@@ -10,6 +10,7 @@ export const GET: APIRoute = async (context: APIContext): Promise<Response> => {
 	const msg: MailDataRequired = {
 		to: "amatthiesen@outlook.com",
 		from: "service@matthiesen.dev", // Use the email address or domain you verified above
+		replyTo: "service@matthiesen.dev",
 		subject: "Test email from Astro Endpoint",
 		text: "Test email from Astro Endpoint, using SendGrid",
 		html: "<strong>Test email from Astro Endpoint, using SendGrid</strong>",
