@@ -19,6 +19,11 @@ function makeEmailBody(
 	};
 }
 
+const headers = {
+	"ACCESS-CONTROL-ALLOW-ORIGIN": "*",
+	"Content-Type": "application/json",
+};
+
 export const GET: APIRoute = async (): Promise<Response> => {
 	const JSONResponseObject = {
 		error: "GET request not supported",
@@ -50,19 +55,25 @@ export const POST: APIRoute = async (
 
 	try {
 		await SendGrid.send(msg);
-		return new Response("Email sent", {
-			status: 200,
-			headers: {
-				"ACCESS-CONTROL-ALLOW-ORIGIN": "*",
+
+		return new Response(
+			JSON.stringify({ message: "Successfully submitted feedback!" }),
+			{
+				status: 200,
+				headers: headers,
 			},
-		});
+		);
 	} catch (error) {
 		const {
 			response: { body: errorResponse },
 		} = error as { response: { body: string } };
-		console.error(errorResponse);
-		return new Response(`Email failed to send:\n${errorResponse}`, {
-			status: 500,
-		});
+
+		return new Response(
+			JSON.stringify({ error: `Email failed to send:\n${errorResponse}` }),
+			{
+				status: 500,
+				headers: headers,
+			},
+		);
 	}
 };
