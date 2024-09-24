@@ -3,7 +3,7 @@ import node from "@astrojs/node";
 
 // https://astro.build/config
 export default defineConfig({
-	site: "https://mailservice.matthiesen.dev",
+	site: "https://mailer.studiocms.xyz",
 	output: "server",
 	adapter: node({
 		mode: "standalone",
